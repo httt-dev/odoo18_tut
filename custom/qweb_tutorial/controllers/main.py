@@ -6,7 +6,31 @@ from markupsafe import Markup
 
 
 class QwebTutorials(http.Controller):
-    @http.route('/qweb-tutorials', type='http',auth ='public')
+    @http.route('/qweb-tutorials', type='http',auth ='public',website=True)
     def qweb_tutorials(self):
         """QWEB tutorials """
-        return http.request.render("qweb_tutorial.somePythonTemplate")
+
+        def some_function():
+            return "returning string from a function"
+
+        some_model = http.request.env['ajs.contact'].sudo().search([])
+
+        data ={
+            'string' : 'QWEB tutorials',
+            'integer': '1000',
+            'some_float': 10.05 ,
+            'boolean': True,
+            'some_list': [1,2,3,4,5],
+            'some_dict': {'any_key': "any_value"},
+            'some_function': some_function(),
+            'model': some_model,
+            'html': '<h3>This is an HTML value!</h3> Added by attacker <script>alert("Do something!!")</script>',
+            'html_escape': '<h3>This is an HTML value!</h3> %s'
+                           % html_escape('Added by attacker <script>alert("Do something!!")</script>'),
+            'html_sanitize': '<h3>This is an HTML value!</h3> %s'
+                             % html_sanitize('Added by attacker <script>alert("Do something!!")</script>'),
+            'markup': Markup('<h3>This is an HTML value!</h3> %s')
+                      % 'Added by attacker <script>alert("Do something!!")</script>',
+        }
+        print( data)
+        return http.request.render("qweb_tutorial.somePythonTemplate", data)
