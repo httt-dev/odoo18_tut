@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="owl_learn.ControlPanel.Patch" t-inherit="web.ControlPanel" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('o_control_panel')]" position="inside">
+            <div t-esc="state.customText" class="o_control_panel_random_quote">
+
+            </div>
+        </xpath>
+    </t>
+</templates>

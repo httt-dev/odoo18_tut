@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+       <t t-name="owl_learn.Many2OneField.CopyClipboard" t-inherit="web.Many2OneField" t-inherit-mode="extension" owl="1">
+            <xpath expr="//div[@class='o_field_many2one_selection']" position="inside">
+                <xpath expr="button[last()]" position="after">
+                    <button  t-if="hasCopyClipboardButton"
+                             type="button"
+                             class="btn text-action oi o_external_button px-1"
+                             data-tooltip="Copy text to clipboard"
+                             t-on-click="onCopyClipboard">
+                        <i class="fa fa-clone"></i>
+                    </button>
+                </xpath>
+            </xpath>
+
+       </t>
+</templates>
